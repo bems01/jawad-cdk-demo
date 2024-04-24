@@ -1,0 +1,21 @@
+<form [formGroup]="postFormGroup">
+  <input
+    formControlName="postTitle"
+    type="text"
+    class="form-control"
+    placeholder="Title"
+  />
+  <textarea
+    formControlName="postBody"
+    type="text"
+    class="form-control"
+    placeholder="Body"
+  ></textarea>
+  <button
+    (click)="onSubmit()"
+    class="btn btn-primary"
+    [disabled]="postFormGroup.invalid"
+  >
+    Post
+  </button>
+</form>

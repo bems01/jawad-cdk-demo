@@ -1,0 +1,46 @@
+name: CDK Bootstrap
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cdk-bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: "us-east-1"
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install dependencies for Angular
+        run: npm install
+        working-directory: web-ng
+      - name: Build Frontend
+        run: npm run build
+        working-directory: web-ng
+      - name: Install dependencies for CDK
+        run: npm install
+        working-directory: infrastructure
+      - name: Bootstrap CDK
+        run: npx cdk bootstrap
+        working-directory: infrastructure
+      - name: Deploy Backend
+        run: npx cdk deploy web-backend
+        working-directory: infrastructure
+      - name: Configure API URL
+        run: node get-api-url-ci.js -prod
+        working-directory: cli-commands
+      - name: Configure API URL
+        run: node get-api-url-ci.js
+        working-directory: cli-commands
+      - name: Rebuild Frontend with URL
+        run: npm run build
+        working-directory: web-ng
+      - name: Deploy Frontend
+        run: npx cdk deploy web-frontend
+        working-directory: infrastructure

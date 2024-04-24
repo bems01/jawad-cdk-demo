@@ -1,0 +1,9 @@
+<p>My Posts:</p>
+<div *ngFor="let post of posts">
+  <h2>{{ post.title }}</h2>
+  <p>{{ post.body }}</p>
+  <h4>Posted: {{ post.timestamp }}</h4>
+</div>
+<div *ngIf="posts.length === 0">
+  <p>No posts found.</p>
+</div>

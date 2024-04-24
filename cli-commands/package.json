@@ -1,0 +1,16 @@
+{
+  "name": "cli-commands",
+  "version": "1.0.0",
+  "description": "",
+  "main": "get-api-url.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "replace-in-file": "^7.1.0"
+  }
+}
