@@ -138,4 +138,4 @@ class PostTable extends Construct {
   }
 }
 
-export { PostTable as GameTable, GameTableProps };
+export { PostTable as GameTable, PostTableProps };
